@@ -7,6 +7,7 @@ import Image from 'next/image';
 import ButtonDemo from "../components/ButtonDemo";
 import ColorPicker from "../components/ColorPicker";
 import PeoplePicker from "../components/PeoplePicker";
+import Tabs from "../components/Tabs";
 
 import { getGeoLocation, getPeople, getWeatherData, getWeatherDataByLatLon, } from "../lib/api";
 
@@ -54,45 +55,43 @@ const Homepage = () => {
   //})
 
   return (
-      <div>
-        <h1>Weather app</h1>
+    <div>
+      <h1>Weather app</h1>
         {errorMsg && <div>{errorMsg}</div>}
         {weatherData && (
-        <div>
-          <h2>{weatherData.city.name}</h2>
-          <p>Current temp: {weatherData.list[0].main.temp}&deg; F</p>
-          <p>{weatherData.list[0].weather[0].description}</p>
-          <Image
-            src={`https://openweathermap.org/img/wn/${weatherData.list[0].weather[0].icon}2x.png`}
-            alt={`Weather icon for ${weatherData.list[0].weather[0].description}`}
-            width={100}
-            height={100}
+          <div>
+            <h2>{weatherData.city.name}</h2>
+            <p>Current temp: {weatherData.list[0].main.temp}&deg; F</p>
+            <p>{weatherData.list[0].weather[0].description}</p>
+            <Image
+              src={`https://openweathermap.org/img/wn/${weatherData.list[0].weather[0].icon}2x.png`}
+              alt={`Weather icon for ${weatherData.list[0].weather[0].description}`}
+              width={100}
+              height={100}
             />
-        </div>
+    </div>
+    )}
         {/*<PeoplePicker people={peopleArr}/>
         <ButtonDemo />
     <ColorPicker /> */}
     {daysOfWeek && (
-    
       <section>
-        <ul>
-        {daysOfWeek.map((day, index) =>{
-          return <li key ={index}>{day}</li>;
-        })}
-        </ul>
+        <Tabs items = {daysOfWeek} clickHandler={setActiveDayIndex}/>
         <div>
-          {weatherData.list.filter((block)=> {
+          {weatherData?.list.filter((block)=> {
             const date= new Date(block.dt * 1000);
             const options = {weekday: "short"};
             const day = date.toLocaleDateString("en-US", options);
             return day === daysOfWeek[activeDayIndex];
-          })
+            });
           .map((block, index)=> {
-            return <p key={index}>{block.main.temp}</p>
-          })
+            return (
+              <p key={index}>{block.main.temp}</p>
+            );
+          });
         </div>
       </section>
     );
   );
 };
-export default Homepage;
+export default Homepage();
