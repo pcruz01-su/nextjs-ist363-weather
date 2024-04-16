@@ -6,7 +6,7 @@ const cx = classnames.bind(styles);
 
 const Tabs = ({ activeIndex, clickHandler, items }) => {
   return (
-    <ul>
+    <ul className={styles.tabs}>
       {items?.map((item, index) => {
         const itemClasses = cx({
           tabs__item: true,

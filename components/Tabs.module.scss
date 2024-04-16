@@ -4,15 +4,15 @@
   list-style: none;
   display: flex;
   gap: 1rem;
-  border-top: 1[x solid grey];
-  border-bottom: 1[x solid grey];
+  border-top: 1px solid grey;
+  border-bottom: 1px solid grey;
   padding: 0.5rem 0;
   &__item {
     font-family: Arial, Helvetica, sans-serif;
     font-size: 1rem;
     cursor: pointer;
     &.active {
-      border-bottom: 3px soild red;
+      border-bottom: 3px solid red;
     }
   }
 }
